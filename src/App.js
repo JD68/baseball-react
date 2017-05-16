@@ -4,8 +4,15 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.onInputChanged = this.onInputChanged.bind(this);
+  }
+  onInputChanged(v) {
+    console.log(v);
+  }
   render() {
-    return (<InputControl />);
+    return (<InputControl onInputChanged={this.onInputChanged} />);
   }
 }
 

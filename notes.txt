@@ -1,0 +1,44 @@
+- Real App with real baseball history database! 
+- Have profressionally built two apps like this but not baseball of course.
+- May host app and have link to github code.
+- Intially purpose is this is a learning task. 
+- Learning EmacScript 6.
+- Learning React and then Angular 2 with typescript
+- Will do React (this one) first and then in Angular 2 with typescript
+- After initial purpose is complete can show to potential employers.
+- After initial purpose is complete can move on to testing, services, database, etc... Full stack
+
+
+- Four components: Input control, divisional team standings, chart summary stats, details view.
+- In input control can select the view which effects chart and details. 
+- Chart is grouping, click on grouping and see grouping details in details view.
+- Views can be dynamically added with out rebuild. 
+- Each view needs to provide chart view and details view
+- intial views available views will be batting average and ERA.
+
+
+- Input control 
+    - finish services needed
+    - finish this feature to completion and move on to team standings    
+    - Input control styles and layout
+    - Input control do cascade at load and every change that effects cascade
+    - cascade is year -> league -> division (optional by year)
+    - Input control division is optional based on year, some years have no divisions
+    - need to save state in app component and hook into Input Control change prop. 
+    - Changes to app state will reload team standings, chart summary and details
+
+- put this into README.md
+- All services are async so when move data to database and use Node REST services. no one should be effected, except error handling
+- spinner or disable all until services return
+- once all data is integrated into client side app, remove data JSON files. They will be behind Node REST services and in DB eventually
+- add react dev tools if needed
+- add more views 
+- Remove unused styles
+- change favicon.ico
+- Router\React router\History\back and forth
+- Redux
+- Node REST services
+- Database
+- Testing
+- get away from create-react-app, do own process. Can't do node services with it, at least I couldn't configure it correctly.
+- do better folder layout once get away from create-react-app
