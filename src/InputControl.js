@@ -8,52 +8,132 @@ class InputControl extends Component {
     this.onShowClick = this.onShowClick.bind(this);
     this.onYearChanged = this.onYearChanged.bind(this);
     this.onLeagueChanged = this.onLeagueChanged.bind(this);
+    this.setLeagues = this.setLeagues.bind(this);
+    this.setDivisions = this.setDivisions.bind(this);
+    this.onDivisionChanged = this.onDivisionChanged.bind(this);
     this.state = {
       years: [],
       leagues:[],
+      leagueLabels: [],
+      divisions: [],
+      divisionsLabels: [],
       year: "",
-      league: ""
+      league: "",
+      division: ""
     };
   }
   componentDidMount() {
     let self = this;
-    inputControlServices.years()
-      .then(function(years) {
-        self.setState({
-          years: years
-        });
-        inputControlServices.leagues(years[0])
-          .then(function(leagues) {
-              self.setState({
-              leagues: leagues
-            });
-          });
-       /* 
-          .then(function(leagues) {
-            self.setState({
-              leagues: leagues
-            });*/
+    let leaguesLabelsPromise = inputControlServices.leagueLabels()
+      .then(function(labels){
+        return labels;
       });
+    let yearsPromise = inputControlServices.years()
+      .then(function(years) {
+        return years;
+      });
+    let divisionsLabelsPromise = inputControlServices.divisionLabels()
+      .then(function(labels){
+        return labels;
+      }); 
+      Promise.all([leaguesLabelsPromise, yearsPromise, divisionsLabelsPromise])
+        .then(function(){
+          self.setState({
+            leagueLabels: arguments[0][0],
+            years: arguments[0][1],
+            year: arguments[0][1][0],
+            divisionsLabels: arguments[0][2]
+          });
+          self.setLeagues(arguments[0][1][0])
+            .then(function(leagues) {
+              self.setState({
+                league: leagues[0][0]
+              });
+            });
+          self.setDivisions(arguments[0][1][0])
+            .then(function(divisions){
+              if(divisions.length === 0) {
+                self.setState({
+                  division: ""
+                });  
+              } else {
+                self.setState({
+                  division: divisions[0][0]
+                });
+              }
+            })
+        });
+  }
+  setDivisions(year) {
+    let self = this;
+    return inputControlServices.divisions(year)
+      .then(function(divisions) {
+          divisions = divisions.reduce(function(acc, division) {
+            if(division) {
+              acc.push([division, self.state.divisionsLabels[division]]);
+            }
+            return acc;
+          }, []);
+          divisions.sort(self.commonSort);
+          self.setState({
+            divisions: divisions
+          });
+          return divisions;
+      });
+  }
+  setLeagues(year) {
+    let self = this;
+    return inputControlServices.leagues(year)
+      .then(function(leagues) {
+          leagues = leagues.reduce(function(acc, league) {
+            acc.push([league, self.state.leagueLabels[league]])
+            return acc;
+          }, []);
+          leagues.sort(self.commonSort);
+          self.setState({
+            leagues: leagues
+          });
+          return leagues;
+      });
+  }
+  commonSort(a,b) {
+    if(a < b) return -1;
+    if(a > b) return 1;
+    return 0;
   }
   onYearChanged(e) {
     let self = this;
     this.setState({
-      year: e.target.value,
-      league: ""
+      year: e.target.value
     });
-    inputControlServices.leagues(e.target.value)
+    this.setLeagues(e.target.value)
       .then(function(leagues) {
         self.setState({
-          leagues: leagues
-        });
+          league: leagues[0][0]
+        })
+      });
+    this.setDivisions(e.target.value)
+      .then(function(divisions) {
+        if(divisions.length === 0){
+          self.setState({
+            division: ""
+          });  
+        } else {
+          self.setState({
+            division: divisions[0][0]
+          })
+        }
       });
   }
   onLeagueChanged(e) {
     this.setState({league: e.target.value});
   }
+  onDivisionChanged(e) {
+    this.setState({division: e.target.value});
+  }
   onShowClick(e) {
-      this.props.onInputChanged(e.target.value);
-      console.log(this.state.years);
+    console.log(this.state)
+    this.props.onInputChanged(e.target.value);
   }
   render() {
     return (
@@ -70,16 +150,16 @@ class InputControl extends Component {
             <label htmlFor="selLeague">League:</label>
             <select className="form-control" id="selLeague" value={this.state.league} onChange={this.onLeagueChanged}>
               {this.state.leagues.map( function(league){
-                return (<option value={league} key={league}>{league}</option>);
+                return (<option value={league[0]} key={league[0]}>{league[1]}</option>);
               })}
             </select>
         </div>
         <div className="col-md-2">
             <label htmlFor="selDivision">Division:</label>
-            <select className="form-control" id="selDivision">
-              <option>East</option>
-              <option>Central</option>
-              <option>West</option>
+            <select className="form-control" id="selDivision"  disabled={this.state.divisions.length === 0 ? "disabled" : ""} value={this.state.division} onChange={this.onDivisionChanged}>
+              {this.state.divisions.map( function(division){
+                return (<option value={division[0]} key={division[0]}>{division[1]}</option>);
+              })}
             </select>
         </div>
         <div className="col-md-2">
