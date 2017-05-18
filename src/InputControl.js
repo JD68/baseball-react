@@ -44,24 +44,8 @@ class InputControl extends Component {
             year: arguments[0][1][0],
             divisionsLabels: arguments[0][2]
           });
-          self.setLeagues(arguments[0][1][0])
-            .then(function(leagues) {
-              self.setState({
-                league: leagues[0][0]
-              });
-            });
-          self.setDivisions(arguments[0][1][0])
-            .then(function(divisions){
-              if(divisions.length === 0) {
-                self.setState({
-                  division: ""
-                });  
-              } else {
-                self.setState({
-                  division: divisions[0][0]
-                });
-              }
-            })
+          self.setLeagues(arguments[0][1][0]);
+          self.setDivisions(arguments[0][1][0]);
         });
   }
   setDivisions(year) {
@@ -76,7 +60,8 @@ class InputControl extends Component {
           }, []);
           divisions.sort(self.commonSort);
           self.setState({
-            divisions: divisions
+            divisions: divisions,
+            division: divisions.length === 0 ? "" : divisions[0][0]
           });
           return divisions;
       });
@@ -91,39 +76,23 @@ class InputControl extends Component {
           }, []);
           leagues.sort(self.commonSort);
           self.setState({
-            leagues: leagues
+            leagues: leagues,
+            league: leagues[0][0]
           });
           return leagues;
       });
   }
   commonSort(a,b) {
-    if(a < b) return -1;
-    if(a > b) return 1;
+    if(a[1] < b[1]) return -1;
+    if(a[1] > b[1]) return 1;
     return 0;
   }
   onYearChanged(e) {
-    let self = this;
     this.setState({
       year: e.target.value
     });
-    this.setLeagues(e.target.value)
-      .then(function(leagues) {
-        self.setState({
-          league: leagues[0][0]
-        })
-      });
-    this.setDivisions(e.target.value)
-      .then(function(divisions) {
-        if(divisions.length === 0){
-          self.setState({
-            division: ""
-          });  
-        } else {
-          self.setState({
-            division: divisions[0][0]
-          })
-        }
-      });
+    this.setLeagues(e.target.value);
+    this.setDivisions(e.target.value);
   }
   onLeagueChanged(e) {
     this.setState({league: e.target.value});
@@ -137,7 +106,7 @@ class InputControl extends Component {
   }
   render() {
     return (
-      <Panel header="Input Control">
+      <Panel header="Input">
         <div className="col-md-2">
             <label htmlFor="selYear">Year:</label>
             <select className="form-control" id="selYear" value={this.state.year} onChange={this.onYearChanged}>
