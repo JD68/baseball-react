@@ -16,13 +16,12 @@
 - Each view needs to provide chart view and details view
 - intial views available views will be Batting Average and ERA.
 
-- Input control 
-    - Input control styles and layout
-    - need to save state in app component and hook into Input Control change prop. 
-    - Changes to app state will reload team standings, 
 
 
-- data is integrated into client side app. They will be behind Node REST services and in DB eventually
+- Input control Input control styles and layout
+- Changes to app state will reload team standings, 
+- data is integrated into client side app. They will be behind Node REST services and in DB SOON!!!!!!
+
 - put this into README.md
 - update README.md with start instructions and dependencies
 - do batting average and era views

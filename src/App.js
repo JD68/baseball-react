@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InputControl from './InputControl';
+import TeamStandings from './TeamStandings';
 import './App.css';
 
 
@@ -22,7 +23,12 @@ class App extends Component {
   }
   render() {
     console.log(this.state);
-    return (<InputControl onInputChanged={this.onInputChanged} />);
+    return (
+      <div>
+        <InputControl onInputChanged={this.onInputChanged} />
+        <TeamStandings year={this.state.year} league={this.state.league} division={this.state.division}/>
+      </div>
+    );
   }
 }
 
