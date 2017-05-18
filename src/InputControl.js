@@ -101,8 +101,11 @@ class InputControl extends Component {
     this.setState({division: e.target.value});
   }
   onShowClick(e) {
-    console.log(this.state)
-    this.props.onInputChanged(e.target.value);
+    this.props.onInputChanged({
+      year: this.state.year,
+      league: this.state.league,
+      division: this.state.division
+    });
   }
   render() {
     return (
