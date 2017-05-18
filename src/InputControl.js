@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
-import inputControlServices from './InputControlServices';
+import baseballDataServices from './BaseballDataServices';
 
 class InputControl extends Component {
   constructor(props) {
@@ -24,15 +24,15 @@ class InputControl extends Component {
   }
   componentDidMount() {
     let self = this;
-    let leaguesLabelsPromise = inputControlServices.leagueLabels()
+    let leaguesLabelsPromise = baseballDataServices.leagueLabels()
       .then(function(labels){
         return labels;
       });
-    let yearsPromise = inputControlServices.years()
+    let yearsPromise = baseballDataServices.years()
       .then(function(years) {
         return years;
       });
-    let divisionsLabelsPromise = inputControlServices.divisionLabels()
+    let divisionsLabelsPromise = baseballDataServices.divisionLabels()
       .then(function(labels){
         return labels;
       }); 
@@ -50,7 +50,7 @@ class InputControl extends Component {
   }
   setDivisions(year) {
     let self = this;
-    return inputControlServices.divisions(year)
+    return baseballDataServices.divisions(year)
       .then(function(divisions) {
           divisions = divisions.reduce(function(acc, division) {
             if(division) {
@@ -68,7 +68,7 @@ class InputControl extends Component {
   }
   setLeagues(year) {
     let self = this;
-    return inputControlServices.leagues(year)
+    return baseballDataServices.leagues(year)
       .then(function(leagues) {
           leagues = leagues.reduce(function(acc, league) {
             acc.push([league, self.state.leagueLabels[league]])

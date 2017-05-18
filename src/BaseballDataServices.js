@@ -135318,7 +135318,7 @@ function teamLabels() {
         resolve(teamLabelsCache);
     });
 }
-function teams(year) {
+function teams(year, league, division) {
     return new Promise((resolve, reject) => {
         resolve(teamsCache[year]);
     });
