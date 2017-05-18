@@ -12,29 +12,29 @@
 - Four components: Input control, divisional team standings, chart summary stats, details view.
 - In input control can select the view which effects chart and details. 
 - Chart is grouping, click on grouping and see grouping details in details view.
-- Views can be dynamically added with out rebuild. 
+- chart summary and details are affected by team selection
 - Each view needs to provide chart view and details view
-- intial views available views will be batting average and ERA.
-
+- intial views available views will be Batting Average and ERA.
 
 - Input control 
-    - finish services needed
-    - finish this feature to completion and move on to team standings    
     - Input control styles and layout
-    - Input control do cascade at load and every change that effects cascade
-    - cascade is year -> league -> division (optional by year)
-    - Input control division is optional based on year, some years have no divisions
     - need to save state in app component and hook into Input Control change prop. 
-    - Changes to app state will reload team standings, chart summary and details
+    - Changes to app state will reload team standings, 
 
+
+- data is integrated into client side app. They will be behind Node REST services and in DB eventually
 - put this into README.md
-- All services are async so when move data to database and use Node REST services. no one should be effected, except error handling
-- spinner or disable all until services return
-- once all data is integrated into client side app, remove data JSON files. They will be behind Node REST services and in DB eventually
-- add react dev tools if needed
-- add more views 
+- update README.md with start instructions and dependencies
+- do batting average and era views
+- All services are async so when move data to database and use Node REST services. no one should be effected, except add error handling
+- do need spinner and disable all until services return
 - Remove unused styles
 - change favicon.ico
+
+
+
+- add react dev tools if needed
+- add more views 
 - Router\React router\History\back and forth
 - Redux
 - Node REST services
