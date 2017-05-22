@@ -5,10 +5,12 @@ import baseballDataServices from './BaseballDataServices';
 class TeamStandings extends Component {
   render() {
 
-    baseballDataServices.teams(this.props.year, this.props.league, this.props.division)
-      .then(function(teams) {
-        console.log(teams)
-      });
+    if(this.props.year && this.props.league) {
+      baseballDataServices.teams(this.props.year, this.props.league, this.props.division)
+        .then(function(teams) {
+          console.log(teams)
+        });
+    }
     return (
       <Panel header="Team Standings">
         <div>{this.props.year}</div>
