@@ -39,6 +39,9 @@ class TeamStandings extends Component {
   }
 
   onTeamSelected(teamId) {
+    this.setState({
+      team: teamId
+    })
     if(this.props.onTeamChanged) {
       this.props.onTeamChanged(teamId);
     }
