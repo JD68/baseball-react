@@ -44,8 +44,14 @@ class InputControl extends Component {
             year: arguments[0][1][0],
             divisionsLabels: arguments[0][2]
           });
-          self.setLeagues(arguments[0][1][0]);
-          self.setDivisions(arguments[0][1][0]);
+          Promise.all([self.setLeagues(arguments[0][1][0]), self.setDivisions(arguments[0][1][0])])
+            .then(function(){
+              self.props.onInputChanged({
+                year: self.state.year,
+                league: arguments[0][0][0][0],
+                division: arguments[0][1][0][0]
+              });
+            });
         });
   }
   setDivisions(year) {

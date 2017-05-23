@@ -3,19 +3,72 @@ import { Panel } from 'react-bootstrap';
 import baseballDataServices from './BaseballDataServices';
 
 class TeamStandings extends Component {
-  render() {
-
-    if(this.props.year && this.props.league) {
-      baseballDataServices.teams(this.props.year, this.props.league, this.props.division)
+  constructor(props) {
+      super(props);
+      this.state = {
+        teamLabels: [],
+        teams: [],
+        team: ""
+      };
+    }
+  componentDidMount() {
+    let self = this;
+    baseballDataServices.teamLabels()
+      .then(function(labels){
+          self.setState({
+            teamLabels: labels
+          });
+      });
+  }
+  componentWillReceiveProps(nextProps) {
+    let self = this;
+    if(nextProps.year && nextProps.league) {
+      baseballDataServices.teams(nextProps.year, nextProps.league, nextProps.division)
         .then(function(teams) {
-          console.log(teams)
+          teams.sort(function(a,b) {
+            if(a.Rank < b.Rank) return -1;
+            if(a.Rank > b.Rank) return 1;
+            return 0;
+          });
+          self.setState({
+            teams: teams
+          });
         });
     }
+  }
+  render() {
     return (
       <Panel header="Team Standings">
-        <div>{this.props.year}</div>
-        <div>{this.props.league}</div>
-        <div>{this.props.division}</div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Win</th>
+              <th>Loss</th>
+              <th>World Series Winner</th>
+              <th>League Winner</th>
+              <th>Division Winner</th>
+              <th>Wildcard</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.teams.map( function(team){
+              return (
+                <tr key={team.teamID}>
+                  <td className="col-md-1">{team.Rank}</td>
+                  <td className="col-md-1">{team.name}</td>
+                  <td className="col-md-1">{team.W}</td>
+                  <td className="col-md-1">{team.L}</td>
+                  <td className="col-md-1">{!team.WSWin ? "--" : team.WSWin}</td>
+                  <td className="col-md-1">{!team.LgWin ? "--" : team.LgWin}</td>
+                  <td className="col-md-1">{!team.DivWin ? "--" : team.DivWin}</td>
+                  <td className="col-md-1">{!team.WCWin ? "--" : team.WCWin}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </Panel>
     );
   }
