@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InputControl from './InputControl';
 import TeamStandings from './TeamStandings';
+import TeamViewSummary from './TeamViewSummary';
 import './App.css';
 
 
@@ -37,6 +38,11 @@ class App extends Component {
           league={this.state.league} 
           division={this.state.division} 
           onTeamChanged={this.onTeamChanged}/>
+        <TeamViewSummary
+          year={this.state.year} 
+          league={this.state.league} 
+          division={this.state.division}
+          team={this.state.team} />
       </div>
     );
   }
