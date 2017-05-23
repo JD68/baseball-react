@@ -5,6 +5,7 @@ import baseballDataServices from './BaseballDataServices';
 class TeamStandings extends Component {
   constructor(props) {
       super(props);
+      this.onTeamSelected = this.onTeamSelected.bind(this);
       this.state = {
         teamLabels: [],
         teams: [],
@@ -36,7 +37,14 @@ class TeamStandings extends Component {
         });
     }
   }
+
+  onTeamSelected(teamId) {
+    if(this.props.onTeamChanged) {
+      this.props.onTeamChanged(teamId);
+    }
+  }
   render() {
+    let self = this;
     return (
       <Panel header="Team Standings">
         <table className="table">
@@ -57,7 +65,9 @@ class TeamStandings extends Component {
               return (
                 <tr key={team.teamID}>
                   <td className="col-md-1">{team.Rank}</td>
-                  <td className="col-md-1">{team.name}</td>
+                  <td className="col-md-1">
+                    <a href="#" onClick={(e) => self.onTeamSelected(team.teamID)}>{team.name}</a>
+                  </td>
                   <td className="col-md-1">{team.W}</td>
                   <td className="col-md-1">{team.L}</td>
                   <td className="col-md-1">{!team.WSWin ? "--" : team.WSWin}</td>
