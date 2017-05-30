@@ -25,40 +25,28 @@ class InputControl extends Component {
   }
   componentDidMount() {
     let self = this;
-    let leaguesLabelsPromise = baseballDataServices.leagueLabels()
-      .then(function(labels){
-        return labels;
-      });
-    let yearsPromise = baseballDataServices.years()
-      .then(function(years) {
-        return years;
-      });
-    let divisionsLabelsPromise = baseballDataServices.divisionLabels()
-      .then(function(labels){
-        return labels;
-      }); 
-     let teamLabelsPromise = baseballDataServices.teamLabels()
-      .then(function(labels){
-        return labels;
-      });
-      Promise.all([leaguesLabelsPromise, yearsPromise, divisionsLabelsPromise, teamLabelsPromise])
-        .then(function(){
-          self.setState({
-            leagueLabels: arguments[0][0],
-            years: arguments[0][1],
-            year: arguments[0][1][0],
-            divisionsLabels: arguments[0][2],
-            teamLabels: arguments[0][3]
-          });
-          Promise.all([self.setLeagues(arguments[0][1][0]), self.setDivisions(arguments[0][1][0])])
-            .then(function(){
-              self.props.onInputChanged({
-                year: self.state.year,
-                league: arguments[0][0][0][0],
-                division: arguments[0][1][0][0]
-              });
-            });
+    let leaguesLabelsPromise = baseballDataServices.leagueLabels();
+    let yearsPromise = baseballDataServices.years();
+    let divisionsLabelsPromise = baseballDataServices.divisionLabels();
+    let teamLabelsPromise = baseballDataServices.teamLabels();
+    Promise.all([leaguesLabelsPromise, yearsPromise, divisionsLabelsPromise, teamLabelsPromise])
+      .then(function(){
+        self.setState({
+          leagueLabels: arguments[0][0],
+          years: arguments[0][1],
+          year: arguments[0][1][0],
+          divisionsLabels: arguments[0][2],
+          teamLabels: arguments[0][3]
         });
+        Promise.all([self.setLeagues(arguments[0][1][0]), self.setDivisions(arguments[0][1][0])])
+          .then(function(){
+            self.props.onInputChanged({
+              year: self.state.year,
+              league: arguments[0][0][0][0],
+              division: arguments[0][1][0][0]
+            });
+          });
+      });
   }
   setDivisions(year) {
     let self = this;
