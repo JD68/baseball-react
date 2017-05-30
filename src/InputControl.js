@@ -17,6 +17,7 @@ class InputControl extends Component {
       leagueLabels: [],
       divisions: [],
       divisionsLabels: [],
+      teamLabels: [],
       year: "",
       league: "",
       division: ""
@@ -36,13 +37,18 @@ class InputControl extends Component {
       .then(function(labels){
         return labels;
       }); 
-      Promise.all([leaguesLabelsPromise, yearsPromise, divisionsLabelsPromise])
+     let teamLabelsPromise = baseballDataServices.teamLabels()
+      .then(function(labels){
+        return labels;
+      });
+      Promise.all([leaguesLabelsPromise, yearsPromise, divisionsLabelsPromise, teamLabelsPromise])
         .then(function(){
           self.setState({
             leagueLabels: arguments[0][0],
             years: arguments[0][1],
             year: arguments[0][1][0],
-            divisionsLabels: arguments[0][2]
+            divisionsLabels: arguments[0][2],
+            teamLabels: arguments[0][3]
           });
           Promise.all([self.setLeagues(arguments[0][1][0]), self.setDivisions(arguments[0][1][0])])
             .then(function(){
@@ -117,7 +123,7 @@ class InputControl extends Component {
     return (
       <Panel header="Input">
         <div className="col-md-2">
-            <label htmlFor="selYear">Year:</label>
+            <label htmlFor="selYear">{this.state.teamLabels["yearID"]}:</label>
             <select className="form-control" id="selYear" value={this.state.year} onChange={this.onYearChanged}>
               {this.state.years.map( function(year){
                 return (<option value={year} key={year.toString()}>{year}</option>);
@@ -125,7 +131,7 @@ class InputControl extends Component {
             </select>
         </div>
         <div className="col-md-2">
-            <label htmlFor="selLeague">League:</label>
+            <label htmlFor="selLeague">{this.state.teamLabels["lgID"]}:</label>
             <select className="form-control" id="selLeague" value={this.state.league} onChange={this.onLeagueChanged}>
               {this.state.leagues.map( function(league){
                 return (<option value={league[0]} key={league[0]}>{league[1]}</option>);
@@ -133,7 +139,7 @@ class InputControl extends Component {
             </select>
         </div>
         <div className="col-md-2">
-            <label htmlFor="selDivision">Division:</label>
+            <label htmlFor="selDivision">{this.state.teamLabels["divID"]}:</label>
             <select className="form-control" id="selDivision"  disabled={this.state.divisions.length === 0 ? "disabled" : ""} value={this.state.division} onChange={this.onDivisionChanged}>
               {this.state.divisions.map( function(division){
                 return (<option value={division[0]} key={division[0]}>{division[1]}</option>);
