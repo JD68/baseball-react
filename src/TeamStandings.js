@@ -9,7 +9,8 @@ class TeamStandings extends Component {
       this.state = {
         teamLabels: [],
         teams: [],
-        team: ""
+        team: "",
+        open: true
       };
     }
   componentDidMount() {
@@ -49,7 +50,7 @@ class TeamStandings extends Component {
   render() {
     let self = this;
     return (
-      <Panel header="Team Standings">
+      <Panel header="Team Standings" onClick={()=> this.setState({ open: !this.state.open })} collapsible expanded={this.state.open}>
         <table className="table">
           <thead>
             <tr>
