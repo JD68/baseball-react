@@ -2,13 +2,13 @@ function years() {
     return commonFetch('years');
 }
 function leagues(year) {
-    return commonFetch('leagues?year=' + year);
+    return commonFetch('/years/' + year + '/leagues');
 }
 function leagueLabels() {
     return commonFetch('leagueLabels');
 }
 function divisions(year) {
-    return commonFetch('divisions?year=' + year);
+    return commonFetch('/years/' + year + '/divisions');
 }
 function divisionLabels() {
     return commonFetch('divisionLabels');
@@ -17,7 +17,11 @@ function teamLabels() {
     return commonFetch('teamLabels');
 }
 function teams(year, league, division) {
-    return commonFetch('teams?year=' + year + "&league=" + league + "&division=" + division);
+    if(!division) {
+        return commonFetch('/years/' + year + '/leagues/' + league + '/teams');    
+    } else {
+        return commonFetch('/years/' + year + '/leagues/' + league + '/divisions/' + division + '/teams');
+    }
 }
 
 function commonFetch(url) {

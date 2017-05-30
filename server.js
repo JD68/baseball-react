@@ -41,16 +41,20 @@ app.get('/teamLabels', (req, res) => {
   res.json(teamLabelsSvc.teamLabels());
 });
 
-app.get('/leagues', (req, res) => {
-  res.json(leaguesSvc.leagues(req.query.year));
+app.get('/years/:year/leagues', (req, res) => {
+  res.json(leaguesSvc.leagues(req.params.year));
 });
 
-app.get('/divisions', (req, res) => {
-  res.json(divisionsSvc.divisions(req.query.year));
+app.get('/years/:year/divisions', (req, res) => {
+  res.json(divisionsSvc.divisions(req.params.year));
 });
 
-app.get('/teams', (req, res) => {
-  res.json(teamsSvc.teams(req.query.year, req.query.league, req.query.division));
+app.get('/years/:year/leagues/:league/divisions/:division/teams', (req, res) => {
+  res.json(teamsSvc.teams(req.params.year, req.params.league, req.params.division));
+});
+
+app.get('/years/:year/leagues/:league/teams', (req, res) => {
+  res.json(teamsSvc.teams(req.params.year, req.params.league, req.params.division));
 });
 
 app.get('*', (req, res) => {

@@ -6,12 +6,11 @@ class teamViewSummary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
     };
   }
   render() {
     return (
-      <Panel header=" View Summary" onClick={()=> this.setState({ open: !this.state.open })} collapsible expanded={this.state.open}>
+      <Panel header=" View Summary">
         <div>{this.props.year}</div>
         <div>{this.props.league}</div>
         <div>{this.props.division}</div>

@@ -20,8 +20,7 @@ class InputControl extends Component {
       teamLabels: [],
       year: "",
       league: "",
-      division: "",
-      open: true
+      division: ""
     };
   }
   componentDidMount() {
@@ -110,7 +109,7 @@ class InputControl extends Component {
   }
   render() {
     return (
-      <Panel header="Input" onClick={()=> this.setState({ open: !this.state.open })} collapsible expanded={this.state.open}>
+      <Panel header="Input">
         <div className="col-md-2">
             <label htmlFor="selYear">{this.state.teamLabels["yearID"]}:</label>
             <select className="form-control" id="selYear" value={this.state.year} onChange={this.onYearChanged}>
