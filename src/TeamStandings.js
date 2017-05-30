@@ -53,14 +53,14 @@ class TeamStandings extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Win</th>
-              <th>Loss</th>
-              <th>World Series Winner</th>
-              <th>League Winner</th>
-              <th>Division Winner</th>
-              <th>Wildcard</th>
+              <th>{this.state.teamLabels["Rank"]}</th>
+              <th>{this.state.teamLabels["name"]}</th>
+              <th>{this.state.teamLabels["W"]}</th>
+              <th>{this.state.teamLabels["L"]}</th>
+              <th>{this.state.teamLabels["WSWin"]}</th>
+              <th>{this.state.teamLabels["LgWin"]}</th>
+              <th>{this.state.teamLabels["DivWin"]}</th>
+              <th>{this.state.teamLabels["WCWin"]}</th>
             </tr>
           </thead>
           <tbody>
