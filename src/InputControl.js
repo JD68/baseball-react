@@ -8,8 +8,8 @@ class InputControl extends Component {
     this.onShowClick = this.onShowClick.bind(this);
     this.onYearChanged = this.onYearChanged.bind(this);
     this.onLeagueChanged = this.onLeagueChanged.bind(this);
-    this.setLeagues = this.setLeagues.bind(this);
-    this.setDivisions = this.setDivisions.bind(this);
+    this.getLeagues = this.getLeagues.bind(this);
+    this.getDivisions = this.getDivisions.bind(this);
     this.onDivisionChanged = this.onDivisionChanged.bind(this);
     this.state = {
       years: [],
@@ -30,55 +30,56 @@ class InputControl extends Component {
     let divisionsLabelsPromise = baseballDataServices.divisionLabels();
     let teamLabelsPromise = baseballDataServices.teamLabels();
     Promise.all([leaguesLabelsPromise, yearsPromise, divisionsLabelsPromise, teamLabelsPromise])
-      .then(function(){
-        self.setState({
-          leagueLabels: arguments[0][0],
-          years: arguments[0][1],
-          year: arguments[0][1][0],
-          divisionsLabels: arguments[0][2],
-          teamLabels: arguments[0][3]
-        });
-        Promise.all([self.setLeagues(arguments[0][1][0]), self.setDivisions(arguments[0][1][0])])
-          .then(function(){
-            self.props.onInputChanged({
-              year: self.state.year,
-              league: arguments[0][0][0][0],
-              division: arguments[0][1][0][0]
+      .then(function(values){
+        let leagueLabels = values[0];
+        let years = values[1];
+        let divisionLabels = values[2];
+        let teamLabels = values[3];
+        let firstYear = years[0];
+
+       Promise.all([self.getLeagues(firstYear, leagueLabels), self.getDivisions(firstYear, divisionLabels)])
+          .then(function(values){
+            let leagues = values[0];
+            let divisions = values[1];
+            let league = leagues[0][0];
+            let division = divisions.length === 0 ? "" : divisions[0][0];
+            self.setState({
+              leagueLabels: leagueLabels,
+              years: years,
+              year: firstYear,
+              divisionsLabels: divisionLabels,
+              teamLabels: teamLabels,
+              divisions: divisions,
+              leagues: leagues,
+              league: league,
+              division: division
             });
           });
       });
   }
-  setDivisions(year) {
+  getDivisions(year, divisionsLabels) {
     let self = this;
     return baseballDataServices.divisions(year)
       .then(function(divisions) {
           divisions = divisions.reduce(function(acc, division) {
             if(division) {
-              acc.push([division, self.state.divisionsLabels[division]]);
+              acc.push([division, divisionsLabels[division]]);
             }
             return acc;
           }, []);
           divisions.sort(self.commonSort);
-          self.setState({
-            divisions: divisions,
-            division: divisions.length === 0 ? "" : divisions[0][0]
-          });
           return divisions;
       });
   }
-  setLeagues(year) {
+  getLeagues(year, leagueLabels) {
     let self = this;
     return baseballDataServices.leagues(year)
       .then(function(leagues) {
           leagues = leagues.reduce(function(acc, league) {
-            acc.push([league, self.state.leagueLabels[league]])
+            acc.push([league, leagueLabels[league]])
             return acc;
           }, []);
           leagues.sort(self.commonSort);
-          self.setState({
-            leagues: leagues,
-            league: leagues[0][0]
-          });
           return leagues;
       });
   }
@@ -88,11 +89,22 @@ class InputControl extends Component {
     return 0;
   }
   onYearChanged(e) {
-    this.setState({
-      year: e.target.value
-    });
-    this.setLeagues(e.target.value);
-    this.setDivisions(e.target.value);
+    let year = e.target.value;
+    let self = this;
+    Promise.all([this.getLeagues(year, this.state.leagueLabels), this.getDivisions(year, this.state.divisionsLabels)])
+      .then(function(values){
+        let leagues = values[0];
+        let divisions = values[1];
+        let league = leagues[0][0];
+        let division = divisions.length === 0 ? "" : divisions[0][0];
+        self.setState({
+          year: year,
+          divisions: divisions,
+          leagues: leagues,
+          league: league,
+          division: division
+        });
+      });
   }
   onLeagueChanged(e) {
     this.setState({league: e.target.value});
@@ -142,7 +154,7 @@ class InputControl extends Component {
             </select>
         </div>
         <div className="col-md-2">
-          <Button className="btn btn-default" onClick={this.onShowClick}>Show Results</Button>
+          <Button className="btn btn-default" onClick={this.onShowClick}>Show Team Standings</Button>
         </div>
       </Panel>
     );
