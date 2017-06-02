@@ -69,7 +69,7 @@ class TeamStandings extends Component {
                 <tr key={team.teamID}>
                   <td className="col-md-1">{team.Rank}</td>
                   <td className="col-md-1">
-                    <a href="#" onClick={(e) => self.onTeamSelected(team.teamID)}>{team.name}</a>
+                    <a href="#" data-toggle="tooltip" title="Show Team Stats" onClick={(e) => self.onTeamSelected(team.teamID)}>{team.name}</a>
                   </td>
                   <td className="col-md-1">{team.W}</td>
                   <td className="col-md-1">{team.L}</td>
