@@ -21,7 +21,8 @@ class App extends Component {
     this.setState({
       year: v.year,
       league: v.league,
-      division: v.division
+      division: v.division,
+      team: ""
     });
   }
   onTeamChanged(teamId) {
