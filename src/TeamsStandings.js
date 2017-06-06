@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import baseballDataServices from './BaseballDataServices';
 
-class TeamStandings extends Component {
+class TeamsStandings extends Component {
   constructor(props) {
       super(props);
       this.onTeamSelected = this.onTeamSelected.bind(this);
@@ -87,4 +87,4 @@ class TeamStandings extends Component {
   }
 }
 
-export default TeamStandings;
+export default TeamsStandings;

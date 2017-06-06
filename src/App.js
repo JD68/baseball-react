@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InputControl from './InputControl';
-import TeamStandings from './TeamStandings';
-import TeamViewSummary from './TeamViewSummary';
+import TeamsStandings from './TeamsStandings';
+import TeamsViewSummary from './TeamsViewSummary';
 import './App.css';
 
 
@@ -36,16 +36,15 @@ class App extends Component {
     return (
       <div>
         <InputControl onInputChanged={this.onInputChanged} />
-        <TeamStandings
+        <TeamsStandings
           year={this.state.year} 
           league={this.state.league} 
           division={this.state.division} 
           onTeamChanged={this.onTeamChanged}/>
-        <TeamViewSummary
+        <TeamsViewSummary
           year={this.state.year} 
           league={this.state.league} 
           division={this.state.division}
-          team={this.state.team}
           view={this.state.view} />
       </div>
     );
