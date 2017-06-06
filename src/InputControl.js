@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
 import baseballDataServices from './BaseballDataServices';
+import viewServices from './ViewServices';
 
 class InputControl extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class InputControl extends Component {
     this.getLeagues = this.getLeagues.bind(this);
     this.getDivisions = this.getDivisions.bind(this);
     this.onDivisionChanged = this.onDivisionChanged.bind(this);
+    this.onViewChanged = this.onViewChanged.bind(this);
     this.state = {
       years: [],
       leagues:[],
@@ -20,7 +22,9 @@ class InputControl extends Component {
       teamLabels: [],
       year: "",
       league: "",
-      division: ""
+      division: "",
+      views: viewServices.views,
+      view: viewServices.views[0]
     };
   }
   componentDidMount() {
@@ -112,11 +116,15 @@ class InputControl extends Component {
   onDivisionChanged(e) {
     this.setState({division: e.target.value});
   }
+  onViewChanged(e) {
+    this.setState({view: e.target.value});
+  }
   onShowClick(e) {
     this.props.onInputChanged({
       year: this.state.year,
       league: this.state.league,
-      division: this.state.division
+      division: this.state.division,
+      view: this.state.view
     });
   }
   render() {
@@ -148,9 +156,10 @@ class InputControl extends Component {
         </div>
         <div className="col-md-2">
             <label htmlFor="selView">View:</label>
-            <select className="form-control" id="selView">
-              <option>Batting Average</option>
-              <option>ERA</option>
+            <select className="form-control" id="selView" onChange={this.onViewChanged}>
+              {this.state.views.map( function(view){
+                return (<option value={view} key={view}>{view}</option>);
+              })}
             </select>
         </div>
         <div className="col-md-2">

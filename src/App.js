@@ -14,7 +14,8 @@ class App extends Component {
       year: "",
       league: "",
       division: "",
-      team: ""
+      team: "",
+      view: ""
     };
   }
   onInputChanged(v) {
@@ -22,7 +23,8 @@ class App extends Component {
       year: v.year,
       league: v.league,
       division: v.division,
-      team: ""
+      team: "",
+      view: v.view
     });
   }
   onTeamChanged(teamId) {
@@ -43,7 +45,8 @@ class App extends Component {
           year={this.state.year} 
           league={this.state.league} 
           division={this.state.division}
-          team={this.state.team} />
+          team={this.state.team}
+          view={this.state.view} />
       </div>
     );
   }

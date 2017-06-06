@@ -15,6 +15,7 @@ class teamViewSummary extends Component {
         <div>{this.props.league}</div>
         <div>{this.props.division}</div>
         <div>{this.props.team}</div>
+        <div>{this.props.view}</div>
       </Panel>
     );
   }
