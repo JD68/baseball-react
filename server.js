@@ -49,6 +49,7 @@ app.get('/years/:year/divisions', (req, res) => {
   res.json(divisionsSvc.divisions(req.params.year));
 });
 
+//use regular expressions to combine the following two
 app.get('/years/:year/leagues/:league/divisions/:division/teams', (req, res) => {
   res.json(teamsSvc.teams(req.params.year, req.params.league, req.params.division));
 });
