@@ -5,11 +5,9 @@ import baseballDataServices from './BaseballDataServices';
 class TeamsStandings extends Component {
   constructor(props) {
       super(props);
-      this.onTeamSelected = this.onTeamSelected.bind(this);
       this.state = {
         teamLabels: [],
-        teams: [],
-        team: ""
+        teams: []
       };
     }
   componentDidMount() {
@@ -38,14 +36,6 @@ class TeamsStandings extends Component {
     }
   }
 
-  onTeamSelected(teamId) {
-    this.setState({
-      team: teamId
-    })
-    if(this.props.onTeamChanged) {
-      this.props.onTeamChanged(teamId);
-    }
-  }
   render() {
     let self = this;
     return (
@@ -68,9 +58,7 @@ class TeamsStandings extends Component {
               return (
                 <tr key={team.teamID}>
                   <td className="col-md-1">{team.Rank}</td>
-                  <td className="col-md-1">
-                    <a href="#" data-toggle="tooltip" title="Show Team Stats" onClick={(e) => self.onTeamSelected(team.teamID)}>{team.name}</a>
-                  </td>
+                  <td className="col-md-1">{team.name}</td>
                   <td className="col-md-1">{team.W}</td>
                   <td className="col-md-1">{team.L}</td>
                   <td className="col-md-1">{!team.WSWin ? "--" : team.WSWin}</td>

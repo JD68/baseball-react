@@ -9,7 +9,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.onInputChanged = this.onInputChanged.bind(this);
-    this.onTeamChanged = this.onTeamChanged.bind(this);
     this.state = {
       year: "",
       league: "",
@@ -27,11 +26,6 @@ class App extends Component {
       view: v.view
     });
   }
-  onTeamChanged(teamId) {
-    this.setState({
-      team: teamId
-    });
-  }
   render() {
     return (
       <div>
@@ -39,8 +33,7 @@ class App extends Component {
         <TeamsStandings
           year={this.state.year} 
           league={this.state.league} 
-          division={this.state.division} 
-          onTeamChanged={this.onTeamChanged}/>
+          division={this.state.division}/>
         <TeamsViewSummary
           year={this.state.year} 
           league={this.state.league} 
