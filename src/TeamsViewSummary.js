@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import baseballDataServices from './BaseballDataServices';
+import viewServices from './ViewServices';
 
 class TeamsViewSummary extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class TeamsViewSummary extends Component {
   render() {
     return (
       <Panel header=" View Summary">
+        {viewServices.getView(this.props.view, this.state.teams)}
         <div>{this.props.year}</div>
         <div>{this.props.league}</div>
         <div>{this.props.division}</div>
