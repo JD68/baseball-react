@@ -12,14 +12,12 @@ const data = [
       {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
 ];
 function eraView(teams) {
-    console.log(teams)
     return  <LineChart width={400} height={400} data={data}>
                 <Line type="monotone" dataKey="uv" stroke="#8884d8" />
             </LineChart>
 }
 
 function battingAverageView(teams) {
-    console.log(teams)
     return  <LineChart width={400} height={400} data={data}>
                 <Line type="monotone" dataKey="uv" stroke="#000000" />
             </LineChart>
