@@ -28,7 +28,7 @@ class TeamsViewSummary extends Component {
   }
   render() {
     return (
-      <Panel header=" View Summary">
+      <Panel header={this.props.view ? "View Summary(" + this.props.view + ")" : "View Summary"}>
         {viewServices.getView(this.props.view, this.state.teams)}
       </Panel>
     );
