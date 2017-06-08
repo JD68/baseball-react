@@ -163,7 +163,7 @@ class InputControl extends Component {
             </select>
         </div>
         <div className="col-md-2">
-          <Button className="btn btn-default" onClick={this.onShowClick}>Show Team Standings</Button>
+          <Button className="btn btn-default" onClick={this.onShowClick}>Show Stats</Button>
         </div>
       </Panel>
     );

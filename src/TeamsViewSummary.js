@@ -15,6 +15,11 @@ class TeamsViewSummary extends Component {
     if(nextProps.year && nextProps.league) {
       baseballDataServices.teams(nextProps.year, nextProps.league, nextProps.division)
         .then(function(teams) {
+          teams.sort(function(a,b) {
+            if(a.Rank < b.Rank) return -1;
+            if(a.Rank > b.Rank) return 1;
+            return 0;
+          });
           self.setState({
             teams: teams
           });
@@ -25,17 +30,6 @@ class TeamsViewSummary extends Component {
     return (
       <Panel header=" View Summary">
         {viewServices.getView(this.props.view, this.state.teams)}
-        <div>{this.props.year}</div>
-        <div>{this.props.league}</div>
-        <div>{this.props.division}</div>
-        <div>{this.props.view}</div>
-        {this.state.teams.map( function(team){
-          return (
-            <div key={team.teamID}>
-              <span>{team.name}</span>
-            </div>
-          );
-        })}
       </Panel>
     );
   }
