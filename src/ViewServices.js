@@ -5,6 +5,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 function createChartFunction(dataKey) {
     return function(teams) {
+        teams.forEach(function(team) {
+            if(typeof team[dataKey] === "string") {
+                team[dataKey] = parseInt(team[dataKey]);
+            }
+        });
         return <ResponsiveContainer aspect={5}>
                     <BarChart data={teams} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                         <XAxis dataKey="name"/>
