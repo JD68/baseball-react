@@ -5,14 +5,16 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 function createChartFunction(dataKey) {
     return function(teams) {
-        return <BarChart width={1900} height={300} data={teams} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                <XAxis dataKey="name"/>
-                <YAxis/>
-                <CartesianGrid strokeDasharray="3 3"/>
-                <Tooltip/>
-                <Legend />
-                <Bar dataKey={dataKey} fill="#82ca9d" />
-            </BarChart>
+        return <ResponsiveContainer aspect={5}>
+                    <BarChart data={teams} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                        <XAxis dataKey="name"/>
+                        <YAxis/>
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <Tooltip/>
+                        <Legend />
+                        <Bar dataKey={dataKey} fill="#82ca9d" />
+                    </BarChart>
+                </ResponsiveContainer>
     };
 }
 
