@@ -13,7 +13,6 @@ class App extends Component {
       year: "",
       league: "",
       division: "",
-      team: "",
       view: ""
     };
   }
@@ -22,7 +21,6 @@ class App extends Component {
       year: v.year,
       league: v.league,
       division: v.division,
-      team: "",
       view: v.view
     });
   }
