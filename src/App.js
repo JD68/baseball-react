@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InputControl from './InputControl';
 import TeamsStandings from './TeamsStandings';
 import TeamsViewSummary from './TeamsViewSummary';
-import './App.css';
 
 
 class App extends Component {
