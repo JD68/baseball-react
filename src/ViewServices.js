@@ -6,7 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 function createChartFunction(dataKey) {
     return function(teams) {
         teams.forEach(function(team) {
-            if(typeof team[dataKey] === "string") {
+            if(typeof team[dataKey] === 'string') {
                 team[dataKey] = parseInt(team[dataKey]);
             }
         });
@@ -24,35 +24,35 @@ function createChartFunction(dataKey) {
 }
 
 const views = {
-    "At Bats": createChartFunction("AB"),
-    "Caught Stealing":createChartFunction("CS"),
-    "Complete Games":createChartFunction("CG"),
-    "Doubles":createChartFunction("2B"),
-    "Double Plays":createChartFunction("DP"),
-    "ERA":createChartFunction("ERA"),
-    "Earned Runs Allowed":createChartFunction("ER"),
-    "Fielding Percentage":createChartFunction("FP"),
-    "Errors":createChartFunction("E"),
-    "Hit By Pitch":createChartFunction("HBP"),
-    "Hits":createChartFunction("H"),
-    "Hits Allowed":createChartFunction("HA"),
-    "Home Attendance Total":createChartFunction("attendance"),
-    "Home Runs":createChartFunction("HR"),
-    "Home Runs Allowed":createChartFunction("HRA"),
-    "Outs Pitched":createChartFunction("IPouts"),
-    "Opponents Runs Scored":createChartFunction("RA"),
-    "Runs Scored":createChartFunction("R"),
-    "Sacrifice Flies":createChartFunction("SF"),
-    "Saves":createChartFunction("SV"),
-    "Shutouts":createChartFunction("SHO"),
-    "Stolen Bases":createChartFunction("SB"),
-    "Strike Outs":createChartFunction("SO"),
-    "Strikeouts By Pitchers":createChartFunction("SOA"),
-    "Three Year Park Factor For Batters":createChartFunction("BPF"),
-    "Three Year Park Factor For Pitchers":createChartFunction("PPF"),
-    "Triples":createChartFunction("3B"),
-    "Walks":createChartFunction("BB"),
-    "Walks Allowed":createChartFunction("BBA")
+    'At Bats': createChartFunction('AB'),
+    'Caught Stealing':createChartFunction('CS'),
+    'Complete Games':createChartFunction('CG'),
+    'Doubles':createChartFunction('2B'),
+    'Double Plays':createChartFunction('DP'),
+    'ERA':createChartFunction('ERA'),
+    'Earned Runs Allowed':createChartFunction('ER'),
+    'Fielding Percentage':createChartFunction('FP'),
+    'Errors':createChartFunction('E'),
+    'Hit By Pitch':createChartFunction('HBP'),
+    'Hits':createChartFunction('H'),
+    'Hits Allowed':createChartFunction('HA'),
+    'Home Attendance Total':createChartFunction('attendance'),
+    'Home Runs':createChartFunction('HR'),
+    'Home Runs Allowed':createChartFunction('HRA'),
+    'Outs Pitched':createChartFunction('IPouts'),
+    'Opponents Runs Scored':createChartFunction('RA'),
+    'Runs Scored':createChartFunction('R'),
+    'Sacrifice Flies':createChartFunction('SF'),
+    'Saves':createChartFunction('SV'),
+    'Shutouts':createChartFunction('SHO'),
+    'Stolen Bases':createChartFunction('SB'),
+    'Strike Outs':createChartFunction('SO'),
+    'Strikeouts By Pitchers':createChartFunction('SOA'),
+    'Three Year Park Factor For Batters':createChartFunction('BPF'),
+    'Three Year Park Factor For Pitchers':createChartFunction('PPF'),
+    'Triples':createChartFunction('3B'),
+    'Walks':createChartFunction('BB'),
+    'Walks Allowed':createChartFunction('BBA')
 }
 
 function getView(view, teams){

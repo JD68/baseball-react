@@ -43,14 +43,14 @@ class TeamsStandings extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th>{this.state.teamLabels["Rank"]}</th>
-              <th>{this.state.teamLabels["name"]}</th>
-              <th>{this.state.teamLabels["W"]}</th>
-              <th>{this.state.teamLabels["L"]}</th>
-              <th>{this.state.teamLabels["WSWin"]}</th>
-              <th>{this.state.teamLabels["LgWin"]}</th>
-              <th>{this.state.teamLabels["DivWin"]}</th>
-              <th>{this.state.teamLabels["WCWin"]}</th>
+              <th>{this.state.teamLabels['Rank']}</th>
+              <th>{this.state.teamLabels['name']}</th>
+              <th>{this.state.teamLabels['W']}</th>
+              <th>{this.state.teamLabels['L']}</th>
+              <th>{this.state.teamLabels['WSWin']}</th>
+              <th>{this.state.teamLabels['LgWin']}</th>
+              <th>{this.state.teamLabels['DivWin']}</th>
+              <th>{this.state.teamLabels['WCWin']}</th>
             </tr>
           </thead>
           <tbody>
@@ -61,10 +61,10 @@ class TeamsStandings extends Component {
                   <td className="col-md-1">{team.name}</td>
                   <td className="col-md-1">{team.W}</td>
                   <td className="col-md-1">{team.L}</td>
-                  <td className="col-md-1">{!team.WSWin ? "--" : team.WSWin}</td>
-                  <td className="col-md-1">{!team.LgWin ? "--" : team.LgWin}</td>
-                  <td className="col-md-1">{!team.DivWin ? "--" : team.DivWin}</td>
-                  <td className="col-md-1">{!team.WCWin ? "--" : team.WCWin}</td>
+                  <td className="col-md-1">{!team.WSWin ? '--' : team.WSWin}</td>
+                  <td className="col-md-1">{!team.LgWin ? '--' : team.LgWin}</td>
+                  <td className="col-md-1">{!team.DivWin ? '--' : team.DivWin}</td>
+                  <td className="col-md-1">{!team.WCWin ? '--' : team.WCWin}</td>
                 </tr>
               );
             })}

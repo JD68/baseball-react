@@ -46,7 +46,7 @@ class InputControl extends Component {
             let leagues = values[0];
             let divisions = values[1];
             let league = leagues[0][0];
-            let division = divisions.length === 0 ? "" : divisions[0][0];
+            let division = divisions.length === 0 ? '' : divisions[0][0];
             self.setState({
               leagueLabels: leagueLabels,
               years: years,
@@ -131,7 +131,7 @@ class InputControl extends Component {
     return (
       <Panel header="Input">
         <div className="col-md-2">
-            <label htmlFor="selYear">{this.state.teamLabels["yearID"]}:</label>
+            <label htmlFor="selYear">{this.state.teamLabels['yearID']}:</label>
             <select className="form-control" id="selYear" value={this.state.year} onChange={this.onYearChanged}>
               {this.state.years.map( function(year){
                 return (<option value={year} key={year.toString()}>{year}</option>);
@@ -139,7 +139,7 @@ class InputControl extends Component {
             </select>
         </div>
         <div className="col-md-2">
-            <label htmlFor="selLeague">{this.state.teamLabels["lgID"]}:</label>
+            <label htmlFor="selLeague">{this.state.teamLabels['lgID']}:</label>
             <select className="form-control" id="selLeague" value={this.state.league} onChange={this.onLeagueChanged}>
               {this.state.leagues.map( function(league){
                 return (<option value={league[0]} key={league[0]}>{league[1]}</option>);
@@ -147,8 +147,8 @@ class InputControl extends Component {
             </select>
         </div>
         <div className="col-md-2">
-            <label htmlFor="selDivision">{this.state.teamLabels["divID"]}:</label>
-            <select className="form-control" id="selDivision"  disabled={this.state.divisions.length === 0 ? "disabled" : ""} value={this.state.division} onChange={this.onDivisionChanged}>
+            <label htmlFor="selDivision">{this.state.teamLabels['divID']}:</label>
+            <select className="form-control" id="selDivision"  disabled={this.state.divisions.length === 0 ? 'disabled' : ''} value={this.state.division} onChange={this.onDivisionChanged}>
               {this.state.divisions.map( function(division){
                 return (<option value={division[0]} key={division[0]}>{division[1]}</option>);
               })}

@@ -9,10 +9,10 @@ class App extends Component {
     super(props);
     this.onInputChanged = this.onInputChanged.bind(this);
     this.state = {
-      year: "",
-      league: "",
-      division: "",
-      view: ""
+      year: '',
+      league: '',
+      division: '',
+      view: ''
     };
   }
   onInputChanged(v) {
